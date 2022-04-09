@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!--
+         Some notes:
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline'; 
+      style-src 'self' 'unsafe-inline'; 
+      media-src *; 
+      connect-src *;
+      img-src 'self' data: content:;">
+    <!--
+        Also
+        base-uri /abc/; - limit to content in this folder  v2
+        form-action ; - limit where forms can be sent  v2    
+        VALUES
+        'self' - anything from the same origin
+        data: - data-uri (base64 images)
+        gap: - phonegap and cordova used by plugins on iOS
+        ws: - web sockets
+        * - anything except data: and blobs
+        filesystem: - access things on the local filesystem
+        blob: - allow Binary Large OBjects
+        mediastream: - allow streamed media
+        content: - used by Cordova
+        'none' - prevent anything in the category
+        https: - anything over https://
+        *.example.com - anything from any subdomain of example.com
+        'unsafe-inline' - inline source elements like style attribute, onclick, or script tags 
+        'unsafe-eval' - allow javascript eval( ). 
+    -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="msapplication-TileColor" content="#2d89ef" />
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+
+    <link rel="stylesheet" href="css/index.css">
+    <title>Home</title>
+</head>
+
+<body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <header class="header">
+        <p class="title">iHUD</p>
+    </header>
+    <main id="app">
+
+    </main>
+
+
+
+    <script src="js/index.js"></script>
+
+</body>
+
+</html>
