@@ -29,6 +29,7 @@ body {
     text-rendering: optimizeSpeed;
     font-family: 'Merriweather', sans-serif;
     text-shadow: 0 1px 2px rgba(12, 12, 12, 0.25);
+    color: var(--text-primary);
 }
 
 body::-webkit-scrollbar {
@@ -59,6 +60,10 @@ body::-webkit-scrollbar-thumb {
     text-align: center;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
     background-color: rgba(0, 0, 0, 0.1);
+}
+
+#chart {
+    border: 1px solid black;
 }
 
 .navbar {
