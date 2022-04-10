@@ -72,7 +72,7 @@ body::-webkit-scrollbar-thumb {
     margin: 1em;
     /* width: 80vw; */
     max-height: 90vh;
-    overflow: clip;
+    overflow-y: scroll;
 }
 
 .svg-content-responsive {

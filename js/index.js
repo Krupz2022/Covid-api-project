@@ -100,9 +100,9 @@ let app = Vue.createApp({
         //
     },
     mounted() {
-        const rect = this.$el.getBoundingClientRect();
+        /* const rect = this.$el.getBoundingClientRect();
         console.log(rect);
-        console.log(`W = ${rect.width} H = ${rect.height}`);
+        console.log(`W = ${rect.width} H = ${rect.height}`); */
         //sizing test with bounding box
         this.renderChart();
     }
