@@ -2,7 +2,7 @@ let app = Vue.createApp({
     //...
     data: function() {
         return {
-            API_URL: 'https://data.covid19india.org/v4/min/data.min.json',
+            API_URL: 'https://data.covid19bharat.org/v4/min/data.min.json',
             viewBoxH: 650,
             viewBoxW: 650,
             mapEl: undefined,
@@ -33,7 +33,7 @@ let app = Vue.createApp({
             // TODO refer https:/ / bl.ocks.org / almccon https: //observablehq.com/collection/@d3/
 
             let url = "js/map.geojson";
-            let self = this;
+            let self = this; //scope magic do not touch
             Promise.resolve(d3.json(url)).then((data) => {
                 this.indiaEl.selectAll("path")
                     .data(data.features)
@@ -47,7 +47,7 @@ let app = Vue.createApp({
                     .on("mouseout", function() { self.handleMouseOut(this) })
                     .append("title")
                     .text((d) => {
-                        return "State : " + d.id + "\n Here goes the state data";
+                        return "State : " + d.title + "\n Here goes the state data";
                     });
 
 
