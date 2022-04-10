@@ -66,12 +66,12 @@ body::-webkit-scrollbar-thumb {
     display: inline-block;
     position: relative;
     width: 90%;
-    padding-bottom: 100%;
+    /* padding-bottom: 100%; */
     vertical-align: top;
     border: 1px solid black;
     margin: 1em;
     /* width: 80vw; */
-    max-height: 50vh;
+    max-height: 90vh;
     overflow: clip;
 }
 

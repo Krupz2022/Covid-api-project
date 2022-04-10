@@ -3,8 +3,8 @@ let app = Vue.createApp({
     data: function() {
         return {
             API_URL: 'https://data.covid19bharat.org/v4/min/data.min.json',
-            viewBoxH: 650,
-            viewBoxW: 650,
+            viewBoxH: 500,
+            viewBoxW: 500,
             mapEl: undefined,
             indiaEL: undefined,
             container: undefined
@@ -12,17 +12,13 @@ let app = Vue.createApp({
     },
     methods: {
         renderChart() {
-            let proj = d3.geoMercator()
-                .scale(1100)
-                .translate([-1250, 770]);
-            let path = d3.geoPath(proj);
-
             this.container = d3.select('#chart')
                 .append("svg:svg")
-                .attr("preserveAspectRatio", "xMinYMin meet")
+                .attr("preserveAspectRatio", "xMidYMid meet")
+                // .attr("width", this.viewBoxW)
+                // .attr("height", this.viewBoxH)
                 .attr("viewBox", `0 0 ${this.viewBoxH} ${this.viewBoxW}`)
                 .classed("svg-content-responsive", true);
-
             //let map = this.container.append("svg:g")
 
             this.indiaEl = this.container.append("svg:g")
@@ -32,9 +28,19 @@ let app = Vue.createApp({
 
             // TODO refer https:/ / bl.ocks.org / almccon https: //observablehq.com/collection/@d3/
 
+
             let url = "js/map.geojson";
             let self = this; //scope magic do not touch
             Promise.resolve(d3.json(url)).then((data) => {
+
+                let proj = d3.geoMercator()
+                    .fitSize([this.viewBoxW, this.viewBoxH / 2], data)
+                    // .scale(1000)
+                    // .translate([-1385, 820]);
+                let path = d3.geoPath().projection(proj);
+                //Put projection and path inside the promise
+                //this allows projection to act on dataset
+
                 this.indiaEl.selectAll("path")
                     .data(data.features)
                     .enter().append("path")
@@ -94,6 +100,10 @@ let app = Vue.createApp({
         //
     },
     mounted() {
+        const rect = this.$el.getBoundingClientRect();
+        console.log(rect);
+        console.log(`W = ${rect.width} H = ${rect.height}`);
+        //sizing test with bounding box
         this.renderChart();
     }
 });
