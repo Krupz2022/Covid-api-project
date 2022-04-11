@@ -1,6 +1,4 @@
 * {
-    margin: 0px;
-    padding: 0px;
     box-sizing: border-box;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     /* make transparent link selection, adjust last value opacity 0 to 1.0 */
@@ -16,6 +14,8 @@
 }
 
 body {
+    margin: 0px;
+    padding: 0px;
     -webkit-touch-callout: none;
     /* prevent callout to copy image, etc when tap to hold */
     -webkit-text-size-adjust: none;
@@ -30,6 +30,11 @@ body {
     font-family: 'Roboto', 'Segoe UI', sans-serif;
     text-shadow: 0 1px 2px rgba(12, 12, 12, 0.25);
     color: var(--text-primary);
+}
+
+main {
+    margin-left: 5rem;
+    /* adjust for width of fixed navbar */
 }
 
 body::-webkit-scrollbar {
@@ -54,26 +59,33 @@ body::-webkit-scrollbar-thumb {
 }
 
 .title {
+    margin: auto;
     font-size: 3em;
     font-weight: bold;
     overflow: visible;
-    padding: 2px;
+    padding: 2px 0;
     text-align: inherit;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
     /* background-color: rgba(0, 0, 0, 0.1); */
 }
 
-#chart {
+#chart-container {
     display: inline-block;
     position: relative;
-    width: 90%;
+    width: 100%;
+    height: 100%;
     /* padding-bottom: 100%; */
     vertical-align: top;
-    border: 1px solid black;
-    margin: 1em;
-    /* width: 80vw; */
-    max-height: 90vh;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    /* margin: 1em;
+     width: 80vw; */
     overflow-y: scroll;
+}
+
+#infogrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 2rem;
 }
 
 .svg-content-responsive {

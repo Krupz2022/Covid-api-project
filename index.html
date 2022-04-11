@@ -148,33 +148,34 @@
         </ul>
     </nav>
     <main id="app">
-        <div class="cards">
-
+        <section class="cards">
             <div class="card1">
                 <h3>Confirmed</h3>
                 <h4>10050</h4>
             </div>
-
             <div class="card2">
                 <h3>Active</h3>
                 <h4>10050</h4>
             </div>
-
             <div class="card3">
                 <h3>Recovered</h3>
                 <h4>10050</h4>
             </div>
-
             <div class="card4">
                 <h3>Deaths</h3>
                 <h4>10050</h4>
             </div>
 
-        </div>
-        <div id="chart">
-
-
-        </div>
+        </section>
+        <section id="infogrid">
+            <div id="info-displaybox">
+                <p>Info will come here</p>
+            </div>
+            <div id="chart-container">
+                <svg id="hook" class="svg-content-responsive" :view-box.camel="viewbox" preserveAspectRatio="xMidYMid meet">
+          </svg>
+            </div>
+        </section>
 
     </main>
 

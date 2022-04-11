@@ -3,25 +3,27 @@ let app = Vue.createApp({
     data: function() {
         return {
             API_URL: 'https://data.covid19bharat.org/v4/min/data.min.json',
-            viewBoxH: 500,
-            viewBoxW: 500,
             mapEl: undefined,
             indiaEL: undefined,
-            container: undefined
+            container: undefined,
+            w: 953.73,
+            h: 984,
+            vbx: 0,
+            vby: 0,
+            viewBoxH: 600,
+            viewBoxW: 500,
         }
     },
     methods: {
         renderChart() {
             this.container = d3.select('#chart')
-                .append("svg:svg")
-                .attr("preserveAspectRatio", "xMidYMid meet")
+                //.append("svg:svg")
                 // .attr("width", this.viewBoxW)
                 // .attr("height", this.viewBoxH)
-                .attr("viewBox", `0 0 ${this.viewBoxH} ${this.viewBoxW}`)
-                .classed("svg-content-responsive", true);
-            //let map = this.container.append("svg:g")
+                //.attr("viewBox", `0 0 ${this.viewBoxH} ${this.viewBoxW}`)
+                //let map = this.container.append("svg:g")
 
-            this.indiaEl = this.container.append("svg:g")
+            this.indiaEl = d3.select('#hook').append("g")
                 .attr("id", "india")
                 .style('stroke', '#000')
                 .style('stroke-width', '0.5');
@@ -98,6 +100,13 @@ let app = Vue.createApp({
     },
     computed: {
         //
+        viewbox() {
+            const { vbx, vby, viewBoxW, viewBoxH } = this.$data;
+            // return [vbx, vby, viewBoxW, viewBoxH].join(' ');
+            //Ignore above formula for now 
+            return "100 -5 300 320";
+            // ^Temporary JANK implementation
+        }
     },
     mounted() {
         /* const rect = this.$el.getBoundingClientRect();
