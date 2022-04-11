@@ -79,7 +79,7 @@ body::-webkit-scrollbar-thumb {
     border: 1px solid rgba(0, 0, 0, 0.1);
     /* margin: 1em;
      width: 80vw; */
-    overflow-y: scroll;
+    overflow-y: clip;
 }
 
 #infogrid {
