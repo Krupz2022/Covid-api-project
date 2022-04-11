@@ -104,7 +104,7 @@ let app = Vue.createApp({
             const { vbx, vby, viewBoxW, viewBoxH } = this.$data;
             // return [vbx, vby, viewBoxW, viewBoxH].join(' ');
             //Ignore above formula for now 
-            return "100 -5 300 320";
+            return "90 -10 320 320";
             // ^Temporary JANK implementation
         }
     },

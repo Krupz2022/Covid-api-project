@@ -30,6 +30,7 @@ body {
     font-family: 'Roboto', 'Segoe UI', sans-serif;
     text-shadow: 0 1px 2px rgba(12, 12, 12, 0.25);
     color: var(--text-primary);
+    overflow-x: clip;
 }
 
 main {
@@ -99,7 +100,7 @@ body::-webkit-scrollbar-thumb {
     position: fixed;
     background-color: var(--bg-primary);
     transition: width 600ms ease;
-    overflow: scroll;
+    overflow: hidden;
 }
 
 .navbar-nav {
