@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 let app = Vue.createApp({
     //...
     data: function() {
@@ -11,7 +12,7 @@ let app = Vue.createApp({
             vbx: 0,
             vby: 0,
             viewBoxH: 600,
-            viewBoxW: 500,
+            viewBoxW: 500
         }
     },
     methods: {
@@ -23,15 +24,13 @@ let app = Vue.createApp({
                 //.attr("viewBox", `0 0 ${this.viewBoxH} ${this.viewBoxW}`)
                 //let map = this.container.append("svg:g")
 
-            this.indiaEl = d3.select('#hook').append("g")
-                .attr("id", "india")
+            this.indiaEl = d3.select('#hook').append('g')
+                .attr('id', 'india')
                 .style('stroke', '#000')
                 .style('stroke-width', '0.5');
-
             // TODO refer https:/ / bl.ocks.org / almccon https: //observablehq.com/collection/@d3/
 
-
-            let url = "js/map.geojson";
+            let url = 'js/map.geojson';
             let self = this; //scope magic do not touch
             Promise.resolve(d3.json(url)).then((data) => {
 
@@ -43,50 +42,50 @@ let app = Vue.createApp({
                 //Put projection and path inside the promise
                 //this allows projection to act on dataset
 
-                this.indiaEl.selectAll("path")
+                this.indiaEl.selectAll('path')
                     .data(data.features)
-                    .enter().append("path")
-                    .attr("d", path)
-                    .attr("id", (d) => { return d.id }) //need function return to get value within enumeration
-                    .style("fill", () => {
+                    .enter().append('path')
+                    .attr('d', path)
+                    .attr('id', (d) => { return d.id; }) //need function return to get value within enumeration
+                    .style('fill', () => {
                         return this.getRandomColor();
                     })
-                    .on("mouseover", function() { self.handleMouseOver(this) })
-                    .on("mouseout", function() { self.handleMouseOut(this) })
-                    .append("title")
+                    .on('mouseover', function() { self.handleMouseOver(this); })
+                    .on('mouseout', function() { self.handleMouseOut(this); })
+                    .append('title')
                     .text((d) => {
-                        return "State : " + d.title + "\n Here goes the state data";
+                        return 'State : ' + d.title + '\n Here goes the state data';
                     });
 
 
-                aa = [80.9462, 26.8467];
+                let aa = [80.9462, 26.8467];
                 // add circles to svg
-                this.indiaEl.selectAll("circle")
+                this.indiaEl.selectAll('circle')
                     .data([aa]).enter()
-                    .append("circle")
-                    .attr("cx", function(d) { return proj(d)[0]; })
-                    .attr("cy", function(d) { return proj(d)[1]; })
-                    .attr("r", "3px")
-                    .attr("fill", "black")
-                    .on("mouseover", function() {
-                        d3.select(this).attr("r", "6px").style('fill', "orange")
+                    .append('circle')
+                    .attr('cx', function(d) { return proj(d)[0]; })
+                    .attr('cy', function(d) { return proj(d)[1]; })
+                    .attr('r', '3px')
+                    .attr('fill', 'black')
+                    .on('mouseover', function() {
+                        d3.select(this).attr('r', '6px').style('fill', 'orange');
                     })
-                    .on("mouseout", function() {
-                        d3.select(this).attr("r", "3px").style("fill", 'black')
+                    .on('mouseout', function() {
+                        d3.select(this).attr('r', '3px').style('fill', 'black');
                     })
-                    .append("title")
+                    .append('title')
                     .text(function(d) {
-                        return "City : " + "Lucknow" + "\n Here goes the City data";
-                    })
+                        return 'City : ' + d.title + '\n Here goes the City data';
+                    });
 
             });
 
         },
         handleMouseOver(that) {
-            d3.select(that).attr("stroke-width", "1.5")
+            d3.select(that).attr('stroke-width', '1.5');
         },
         handleMouseOut(that) {
-            d3.select(that).attr("stroke-width", "0.5")
+            d3.select(that).attr('stroke-width', '0.5');
         },
         getRandomColor() {
             var letters = '0123456789ABCDEF';
@@ -101,10 +100,10 @@ let app = Vue.createApp({
     computed: {
         //
         viewbox() {
-            const { vbx, vby, viewBoxW, viewBoxH } = this.$data;
+            // const { vbx, vby, viewBoxW, viewBoxH } = this.$data;
             // return [vbx, vby, viewBoxW, viewBoxH].join(' ');
             //Ignore above formula for now 
-            return "90 -10 320 320";
+            return '90 -10 320 320';
             // ^Temporary JANK implementation
         }
     },
