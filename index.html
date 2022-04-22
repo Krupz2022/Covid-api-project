@@ -151,25 +151,27 @@
         <section class="cards">
             <div class="card1">
                 <h3>Confirmed</h3>
-                <h4>10050</h4>
+                <h4>2017900</h4>
             </div>
             <div class="card2">
                 <h3>Active</h3>
-                <h4>10050</h4>
+                <h4>12542</h4>
             </div>
             <div class="card3">
                 <h3>Recovered</h3>
-                <h4>10050</h4>
+                <h4>42504753</h4>
             </div>
             <div class="card4">
                 <h3>Deaths</h3>
-                <h4>10050</h4>
+                <h4>522146</h4>
             </div>
 
         </section>
         <section id="infogrid">
             <div id="info-displaybox">
-                <p>Info will come here</p>
+                <h2>Info will go here</h2>
+
+                <h3>Confirmed Cases: {{stateWiseData[focusedState]}} , {{currentPercent}}%</h3>
             </div>
             <div id="chart-container">
                 <svg id="hook" class="svg-content-responsive" :view-box.camel="viewbox" preserveAspectRatio="xMidYMid meet">

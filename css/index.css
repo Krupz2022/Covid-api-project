@@ -28,6 +28,7 @@ body {
     min-height: 100vh;
     width: 100vw;
     max-width: 100%;
+    background-color: #e4e4e4;
     text-rendering: optimizeSpeed;
     font-family: Roboto, 'Segoe UI', Arial, Helvetica, sans-serif;
     text-shadow: 0 1px 2px rgba(12, 12, 12, 0.25);
@@ -66,7 +67,7 @@ body::-webkit-scrollbar-thumb {
     font-size: 3em;
     font-weight: bold;
     overflow: visible;
-    padding: 2px 0;
+    padding: 5px 0;
     text-align: inherit;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
     /* background-color: rgba(0, 0, 0, 0.1); */
@@ -89,6 +90,12 @@ body::-webkit-scrollbar-thumb {
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-top: 2rem;
+}
+
+#info-displaybox {
+    padding: 1rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    -webkit-text-stroke: 1px rgba(255, 0, 0, 0.2);
 }
 
 .svg-content-responsive {
