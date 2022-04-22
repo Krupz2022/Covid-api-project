@@ -4,6 +4,7 @@ let app = Vue.createApp({
     data: function() {
         return {
             API_URL: 'https://data.covid19bharat.org/v4/min/data.min.json',
+            API_DATA: undefined,
             mapEl: undefined,
             indiaEL: undefined,
             container: undefined,
@@ -15,7 +16,7 @@ let app = Vue.createApp({
             viewBoxW: 500,
             focusedState: 'UN',
             stateWiseData: {
-                'TT': 43052521,
+                /* 'TT': 43052521,
                 'AN': 10034,
                 'AP': 2319653,
                 'AR': 64495,
@@ -52,14 +53,27 @@ let app = Vue.createApp({
                 'TR': 100876,
                 'UP': 2072268,
                 'UT': 437356,
-                'WB': 2017900
+                'WB': 2017900 */
             },
             currentPercent: 100,
             currentStateTitle: 'State'
         }
     },
     methods: {
+        async fetchApi() {
+            const req = await fetch(this.API_URL)
+            const resp = await req.json()
+            const jsonObj = resp
+            console.log(resp.AN.total)
+            this.API_DATA = jsonObj
+            window['jsonObj'] = jsonObj;
+
+            for (state in resp) {
+                this.stateWiseData[state] = resp[state].total.confirmed
+            }
+        },
         renderChart() {
+
             this.container = d3.select('#chart')
                 //.append("svg:svg")
                 // .attr("width", this.viewBoxW)
@@ -122,27 +136,36 @@ let app = Vue.createApp({
             })
 
         },
+        calcPercent(num, denom) {
+            let percent = num / denom * 100;
+            return percent
+        },
         handleMouseOver(that) {
-            d3.select(that).attr('stroke-width', '1')
+            d3.select(that).attr('stroke-width', '1');
             this.focusedState = that.id;
-            let percent = (this.stateWiseData[that.id] / this.stateWiseData['TT']) * 100
+            let percent = this.calcPercent(this.stateWiseData[that.id], this.stateWiseData['TT']);
             this.currentPercent = percent.toFixed(2);
-            this.currentStateTitle = that.title;
+            this.currentStateTitle = that.title || 'State';
             this.currentStateTitle = document.getElementById(this.focusedState).textContent;
             // console.log(percent);
         },
         handleMouseOut(that) {
-            d3.select(that).attr('stroke-width', '0.4')
+
+            d3.select(that).attr('stroke-width', '0.4');
+            this.currentStateTitle = 'State';
+            this.focusedState = 'TT';
+            this.currentPercent = 0
+
         },
         getColor(id) {
             let totalData = this.stateWiseData['TT'];
             let currentState = this.stateWiseData[id];
-            let baseColor = 'rgba(255, 7, 58,';
             let healthPercent = (currentState / totalData) * 10;
             //current base logic for health percentage to calculate out of total data,
             // multiplying by 10 specifically for transparency consistency in rgba()
+
             console.log(healthPercent)
-            return (baseColor + '' + healthPercent + ')')
+            return ('rgba(255, 7, 58,' + healthPercent + ')')
         },
 
     },
@@ -161,7 +184,8 @@ let app = Vue.createApp({
         console.log(rect);
         console.log(`W = ${rect.width} H = ${rect.height}`); */
         //sizing test with bounding box
-        this.renderChart()
+
+        this.fetchApi().then(this.renderChart);
     }
 })
 app.mount('#app')
