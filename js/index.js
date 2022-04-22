@@ -14,7 +14,7 @@ let app = Vue.createApp({
             vby: 0,
             viewBoxH: 600,
             viewBoxW: 500,
-            focusedState: 'UN',
+            focusedState: 'TT',
             stateWiseData: {
                 /* 'TT': 43052521,
                 'AN': 10034,
@@ -55,7 +55,7 @@ let app = Vue.createApp({
                 'UT': 437356,
                 'WB': 2017900 */
             },
-            currentPercent: 100,
+            currentPercent: 0,
             currentStateTitle: 'State'
         }
     },
@@ -65,8 +65,8 @@ let app = Vue.createApp({
             const resp = await req.json()
             const jsonObj = resp
             console.log(resp.AN.total)
-            this.API_DATA = jsonObj
-            window['jsonObj'] = jsonObj;
+            this.API_DATA = JSON.parse(JSON.stringify(jsonObj));
+            window['jsonObj'] = this.API_DATA;
 
             for (state in resp) {
                 this.stateWiseData[state] = resp[state].total.confirmed
@@ -150,12 +150,10 @@ let app = Vue.createApp({
             // console.log(percent);
         },
         handleMouseOut(that) {
-
             d3.select(that).attr('stroke-width', '0.4');
-            this.currentStateTitle = 'State';
-            this.focusedState = 'TT';
-            this.currentPercent = 0
-
+            /*  this.currentStateTitle = 'State';
+             this.focusedState = 'TT';
+             this.currentPercent = 0 */
         },
         getColor(id) {
             let totalData = this.stateWiseData['TT'];
