@@ -55,7 +55,7 @@ let app = Vue.createApp({
                 'WB': 2017900
             },
             currentPercent: 100,
-            displayEl: undefined
+            currentStateTitle: 'State'
         }
     },
     methods: {
@@ -70,7 +70,7 @@ let app = Vue.createApp({
             this.indiaEl = d3.select('#hook').append('g')
                 .attr('id', 'india')
                 .style('stroke', '#000')
-                .style('stroke-width', '0.5')
+                .style('stroke-width', '0.4')
                 // TODO refer https:/ / bl.ocks.org / almccon https: //observablehq.com/collection/@d3/
 
             let url = 'js/map.geojson'
@@ -91,14 +91,12 @@ let app = Vue.createApp({
                     .attr('d', path)
                     .attr('id', (d) => { return d.id }) //need function return to get value within enumeration
                     .style('fill', (d) => {
-                        return this.getRandomColor(d.id)
+                        return this.getColor(d.id)
                     })
                     .on('mouseover', function() { self.handleMouseOver(this) })
                     .on('mouseout', function() { self.handleMouseOut(this) })
                     .append('title')
-                    .text((d) => {
-                        return 'State : ' + d.title + '\n Here goes the state data'
-                    })
+                    .text((d) => { return d.title })
 
 
                 let aa = [80.9462, 26.8467]
@@ -125,26 +123,27 @@ let app = Vue.createApp({
 
         },
         handleMouseOver(that) {
-            d3.select(that).attr('stroke-width', '1.5')
+            d3.select(that).attr('stroke-width', '1')
             this.focusedState = that.id;
             let percent = (this.stateWiseData[that.id] / this.stateWiseData['TT']) * 100
             this.currentPercent = percent.toFixed(2);
-            console.log(percent);
+            this.currentStateTitle = that.title;
+            this.currentStateTitle = document.getElementById(this.focusedState).textContent;
+            // console.log(percent);
         },
         handleMouseOut(that) {
-            d3.select(that).attr('stroke-width', '0.5')
+            d3.select(that).attr('stroke-width', '0.4')
         },
-        getRandomColor(id) {
+        getColor(id) {
             let totalData = this.stateWiseData['TT'];
             let currentState = this.stateWiseData[id];
             let baseColor = 'rgba(255, 7, 58,';
             let healthPercent = (currentState / totalData) * 10;
+            //current base logic for health percentage to calculate out of total data,
+            // multiplying by 10 specifically for transparency consistency in rgba()
             console.log(healthPercent)
             return (baseColor + '' + healthPercent + ')')
         },
-        getColor() {
-
-        }
 
     },
     computed: {
