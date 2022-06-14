@@ -163,7 +163,7 @@ let app = Vue.createApp({
             // multiplying by 10 specifically for transparency consistency in rgba()
 
             console.log(healthPercent)
-            return ('rgba(255, 7, 58,' + healthPercent + ')')
+            return ('rgba(0, 74, 255,' + healthPercent + ')')
         },
 
     },
