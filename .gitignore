@@ -3,3 +3,4 @@
 .eslintrc.js
 package.json
 package-lock.json
+workspace.code-workspace
